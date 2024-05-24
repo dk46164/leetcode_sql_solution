@@ -1,0 +1,10 @@
+/* Write your T-SQL query statement below */
+
+WITH CTE_B AS (
+        SELECT 
+            SALARY,DENSE_RANK() OVER(ORDER BY SALARY DESC) AS RNK
+        FROM 
+            EMPLOYEE)  
+SELECT SALARY AS SecondHighestSalary FROM CTE_B WHERE RNK=2 
+UNION
+SELECT NULL AS SecondHighestSalary FROM CTE_B WHERE (SELECT COUNT(DISTINCT SALARY) FROM CTE_B)=1;
