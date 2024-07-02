@@ -5,10 +5,13 @@ class ParkingSystem:
         self.car_slot_map = {1:big,2:medium,3:small}
         
     def addCar(self, carType: int) -> bool:
+        # check if car slot space is available
+        avl_flg = self.car_slot_map[carType]>0
         
         # update variable
-        self.car_slot_map[carType] = avl_flg = max( self.car_slot_map[carType]-1,-1)
-        return avl_flg>-1
+        self.car_slot_map[carType] = self.car_slot_map[carType]-1  if \
+                                                self.car_slot_map[carType]>0  else 0
+        return avl_flg
 
 
 
